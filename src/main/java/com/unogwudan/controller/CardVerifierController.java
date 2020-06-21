@@ -26,7 +26,6 @@ public class CardVerifierController {
 
     @GetMapping("/verify/{cardNumber}")
     public BaseResponse<?> verifyCard(@PathVariable String cardNumber) {
-        log.info("Card Number: " + cardNumber);
         return new BaseResponse<>(cardVerifierService.verifyCard(cardNumber));
     }
 
