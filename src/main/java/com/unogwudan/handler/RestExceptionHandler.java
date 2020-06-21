@@ -18,7 +18,6 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.NoHandlerFoundException;
-
 import javax.persistence.EntityNotFoundException;
 import java.util.Map;
 
@@ -27,6 +26,7 @@ import java.util.Map;
  */
 @ControllerAdvice
 public class RestExceptionHandler {
+
     @ExceptionHandler(CardValidatorException.class)
     public ResponseEntity<ResponseWrapper<Object>> handleException(CardValidatorException e) {
         return errorResponse(e.toResponseWrapper());

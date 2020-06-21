@@ -29,7 +29,7 @@ public class CardVerifierService implements ICardVerifierService {
     private final RestTemplate restTemplate;
     private final VerifiedCardProducer verifiedCardProducer;
     private final ICardStatisticService cardStatisticService;
-    Map<String, Object> verifiedCards = new HashMap<>();
+    Map<String, VerifiedCardDetailsResponse> verifiedCards = new HashMap<>();
 
     public CardVerifierService(RestTemplate restTemplate, VerifiedCardProducer verifiedCardProducer, ICardStatisticService cardStatisticService) {
         this.restTemplate = restTemplate;
@@ -52,7 +52,7 @@ public class CardVerifierService implements ICardVerifierService {
             cardDetails = callVerifyCardApi(cardNumber);
             verifiedCards.put(cardNumber, cardDetails);
         } else {
-            cardDetails = (VerifiedCardDetailsResponse) verifiedCards.get(cardNumber);
+            cardDetails = verifiedCards.get(cardNumber);
         }
 
         VerifiedCardDetails verifiedCardDetails = new VerifiedCardDetails(cardDetails.getScheme(), cardDetails.getType());

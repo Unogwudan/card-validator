@@ -1,5 +1,6 @@
 package com.unogwudan.services.dao;
 
+import com.unogwudan.dto.response.CardStatsResponse;
 import com.unogwudan.interfaces.services.ICardStatisticService;
 import com.unogwudan.model.CardStatistic;
 import com.unogwudan.repository.CardStatisticRepository;
@@ -8,7 +9,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * Created by Daniel Unogwu on 21/06/20.
@@ -37,9 +39,12 @@ public class CardStatisticService implements ICardStatisticService {
     }
 
     @Override
-    public List<CardStatistic> getStatistics(int start, int limit) {
+    public CardStatsResponse getStatistics(int start, int limit) {
         PageRequest pageRequest = PageRequest.of(0, limit, Sort.by("createdAt").descending());
         Page<CardStatistic> data = statisticRepository.findAll(pageRequest);
-        return data.getContent();
+
+        Map<String, Integer> payload = data.getContent().parallelStream().collect(
+                Collectors.toMap(CardStatistic :: getCardNumber, CardStatistic :: getCount));
+        return new CardStatsResponse(start, limit, statisticRepository.count(), payload);
     }
 }

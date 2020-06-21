@@ -2,6 +2,7 @@ package com.unogwudan.controller;
 
 import com.unogwudan.constant.CommonConstant;
 import com.unogwudan.dto.response.BaseResponse;
+import com.unogwudan.dto.response.CardStatsResponse;
 import com.unogwudan.interfaces.services.ICardStatisticService;
 import com.unogwudan.interfaces.services.ICardVerifierService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +31,7 @@ public class CardVerifierController {
     }
 
     @GetMapping("/stats/")
-    public BaseResponse<?> getStats(@RequestParam("start") int start, @RequestParam("limit") int limit) {
-        return new BaseResponse<>(cardStatisticService.getStatistics(start, limit));
+    public CardStatsResponse getStats(@RequestParam("start") int start, @RequestParam("limit") int limit) {
+        return cardStatisticService.getStatistics(start, limit);
     }
 }
