@@ -1,7 +1,7 @@
 version: "3"
 services:
   tvp-sql-server:
-    container_name: card-validator-server
+    container_name: card-validator-sql-server
     image: microsoft/mssql-server-linux
     restart: always
     ports:
@@ -24,4 +24,4 @@ services:
     volumes:
       - .:/code
     depends_on:
-      - tvp-sql-server
+      - card-validator-sql-server
