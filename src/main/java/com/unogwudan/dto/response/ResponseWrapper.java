@@ -27,8 +27,10 @@ import static com.unogwudan.constant.ModelConstant.MESSAGE;
 @ToString
 public class ResponseWrapper<T> {
 
-    public boolean status = false;
+    public boolean success = false;
+    @JsonIgnore
     private int statusCode;
+    @JsonIgnore
     private String message;
 
     {
@@ -46,8 +48,9 @@ public class ResponseWrapper<T> {
     }
 
 
-    private T data;
+    private T payload;
 
+    @JsonIgnore
     private Map<String, Object> validation;
 
     @JsonIgnore
@@ -61,10 +64,10 @@ public class ResponseWrapper<T> {
     }
 
     private void setSuccessParams(T body, String message, HttpStatus status){
-        setStatus(status.is2xxSuccessful());
+        setSuccess(status.is2xxSuccessful());
         setMessage(message);
         setStatusCode(status.value());
-        setData(body);
+        setPayload(body);
         setValidation(null);
     }
 
@@ -99,13 +102,13 @@ public class ResponseWrapper<T> {
         errors.forEach(fieldError -> {
             validation.put(fieldError.getField(), fieldError.getDefaultMessage());
         });
-        setData(body);
+        setPayload(body);
         setStatusCode(HttpStatus.BAD_REQUEST.value());
         setValidation(validation);
     }
   
     public ResponseWrapper(String message) {
-        setStatus(false);
+        setSuccess(false);
         setMessage(message);
     }
 }

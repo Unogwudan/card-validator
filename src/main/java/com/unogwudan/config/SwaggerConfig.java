@@ -30,7 +30,8 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.unogwudan.controller"))
                 .paths(PathSelectors.any())
-                .build().globalOperationParameters(parameters);
+                .build();
+                //.globalOperationParameters(parameters);
     }
 
     private ApiInfo apiInfo() {
