@@ -1,0 +1,27 @@
+version: "3"
+services:
+  tvp-sql-server:
+    container_name: card-validator-server
+    image: microsoft/mssql-server-linux
+    restart: always
+    ports:
+      - 5045:1433
+    environment:
+      SA_PASSWORD: Testpass123!
+      ACCEPT_EULA: "Y"
+      MSSQL_DB: tvp_core_db
+      MSSQL_USER: sa
+      MSSQL_PASSWORD: Testpass123!
+    volumes:
+      - ~/sqlserver-data:/var/opt/mssql
+  tvp-core:
+    restart: always
+    build:
+      context: .
+      dockerfile: staging.dockerfile
+    ports:
+      - 8020:8020
+    volumes:
+      - .:/code
+    depends_on:
+      - tvp-sql-server

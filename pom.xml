@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.unogwudan</groupId>
-    <artifactId>card_validator</artifactId>
+    <artifactId>card-validator</artifactId>
     <version>1.0.0</version>
     <name>card-validator</name>
     <description>Rest API for validating cards</description>
