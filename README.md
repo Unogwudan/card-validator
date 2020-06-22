@@ -29,8 +29,8 @@ Ensure you have Kafka running on your machine.
 Note: You don't have to create a database if you are running the Docker container, it will automatically pull and run an MSSQL Linux container.
 
 
-//Swagger URL
+======= SWAGGER URL =============
 localhost:8020/swagger-ui.html#!/
 
-//Health Endpoint
+======  HEALTH ENDPOINT =========
 localhost:8020/actuator/health
